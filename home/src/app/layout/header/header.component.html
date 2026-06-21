@@ -1,0 +1,7 @@
+<header class="header">
+  <h1>MyStore</h1>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Product List</a> | 
+    <a routerLink="/cart" routerLinkActive="active">Cart <span *ngIf="cartCount > 0">({{ cartCount }})</span></a>
+  </nav>
+</header>

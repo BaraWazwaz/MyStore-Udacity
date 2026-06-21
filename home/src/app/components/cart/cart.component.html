@@ -1,0 +1,57 @@
+<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
+  <div class="cart-panel">
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="item.product.url" alt="{{ item.product.name }}">
+      <div class="cart-item-details">
+        <h4>{{ item.product.name }}</h4>
+        <p>{{ item.product.price | currency }}</p>
+        <div class="form-margin">
+          <label>Qty: </label>
+          <input type="number" class="number-input" [(ngModel)]="item.quantity" (ngModelChange)="onQuantityChange(item.product.id, $event)" min="1" />
+        </div>
+        <button (click)="onRemoveItem(item.product.id)">Remove</button>
+      </div>
+    </div>
+    <h3>Total: {{ getTotalPrice() | currency }}</h3>
+  </div>
+
+  <div class="cart-panel">
+    <form #checkoutForm="ngForm" (ngSubmit)="onSubmitCheckout()">
+      <div class="form-margin">
+        <label for="fullName">Full Name</label><br>
+        <input type="text" id="fullName" name="fullName" [(ngModel)]="fullName" required minlength="3" #nameInput="ngModel" placeholder="(minimum 3 characters)" />
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" style="color: red;">
+          <small *ngIf="nameInput.errors?.required">Full Name is required.</small>
+          <small *ngIf="nameInput.errors?.minlength">Full Name must be at least 3 characters long.</small>
+        </div>
+      </div>
+
+      <div class="form-margin">
+        <label for="address">Address</label><br>
+        <input type="text" id="address" name="address" [(ngModel)]="address" required minlength="6" #addressInput="ngModel" placeholder="(minimum 6 characters)" />
+        <div *ngIf="addressInput.invalid && (addressInput.dirty || addressInput.touched)" style="color: red;">
+          <small *ngIf="addressInput.errors?.required">Address is required.</small>
+          <small *ngIf="addressInput.errors?.minlength">Address must be at least 6 characters long.</small>
+        </div>
+      </div>
+
+      <div class="form-margin">
+        <label for="creditCard">Credit Card Number</label><br>
+        <input type="text" id="creditCard" name="creditCard" [(ngModel)]="creditCard" required minlength="16" maxlength="16" pattern="[0-9]*" #ccInput="ngModel" placeholder="(16 digit number)" />
+        <div *ngIf="ccInput.invalid && (ccInput.dirty || ccInput.touched)" style="color: red;">
+          <small *ngIf="ccInput.errors?.required">Credit Card number is required.</small>
+          <small *ngIf="ccInput.errors?.pattern">Credit Card number must contain digits only.</small>
+          <small *ngIf="ccInput.errors?.minlength">Credit Card number must be 16 digits long.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="checkoutForm.invalid">Submit</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="empty-cart-message">
+    <h3>Your cart is empty. <a routerLink="/">Go shop!</a></h3>
+  </div>
+</ng-template>

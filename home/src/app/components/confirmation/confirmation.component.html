@@ -1,0 +1,13 @@
+<div class="confirmation-container">
+  <div class="confirmation-items">
+    <h1 class="confirmation-header">Order Confirmed!</h1>
+    <div class="confirmation-item">
+      <h3>Thank you, {{ fullName }}!</h3>
+      <p>Your order has been successfully placed.</p>
+      <p>Your card was charged: <strong>{{ total | currency }}</strong></p>
+    </div>
+    <div class="confirmation-item">
+      <button class="btn btn-primary" routerLink="/">Back to Product List</button>
+    </div>
+  </div>
+</div>
