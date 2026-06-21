@@ -1,27 +1,53 @@
-# MyStore
+# MyStore — Udacity Angular E-Commerce Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+A fully functional single-page e-commerce web application built with Angular 11 and TypeScript.
 
-## Development server
+## Project Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+MyStore allows users to browse a list of products, view product details, add items to a shopping cart, fill out a checkout form, and receive an order confirmation. The application reads product data from a local JSON file using Angular's `HttpClient`.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Product List** — Displays all available products (photo, name, price) loaded from `assets/data.json`
+- **Product Detail** — Shows detailed information for a selected product (photo, name, price, description)
+- **Shopping Cart** — Shows added items with quantities and total cost; items can be updated or removed
+- **Checkout Form** — Collects customer name, address, and credit card number with client-side validation
+- **Order Confirmation** — Confirms the order and shows the customer's name and total charged
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+# Navigate to the home directory
+cd home
 
-## Running unit tests
+# Install dependencies
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Serve the application
+ng serve
+```
 
-## Running end-to-end tests
+Then open your browser to **http://localhost:4200**
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Tech Stack
 
-## Further help
+- Angular 11
+- TypeScript
+- Angular HttpClient (reads `src/assets/data.json`)
+- Angular Router (Single Page Application — no page reloads)
+- Angular FormsModule (`ngModel`, form validation)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Project Structure
+
+```
+home/src/app/
+  models/           product.ts            (Product & CartItem interfaces)
+  services/         product.service.ts    (loads data.json)
+                    cart.service.ts       (manages cart state across components)
+  components/       product-list/         (lists all products using *ngFor)
+                    product-item/         (individual product card — @Input/@Output)
+                    product-item-detail/  (single product detail view)
+                    cart/                 (cart listing + checkout form)
+                    confirmation/         (order success page)
+  layout/           header/               (navigation bar with cart count badge)
+```
