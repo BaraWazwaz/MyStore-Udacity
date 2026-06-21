@@ -1,0 +1,27 @@
+# Set the default behavior for files, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files so Git will always normalize them to LF
+*.ts text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.md text eol=lf
+
+# Exclude documentation and build files from export-tarballs
+.gitignore export-ignore
+.gitattributes export-ignore
+
+# Denote all binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
